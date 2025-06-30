@@ -1,51 +1,52 @@
 'use client'
 
 import { useState } from 'react'
-import { FaReact, FaNodeJs, FaHtml5, FaCss3Alt, FaSass, FaBootstrap, FaPython, FaDatabase, FaTable, FaPalette, FaAws, FaCheckCircle } from 'react-icons/fa'
-import { SiNextdotjs, SiRedux, SiJavascript, SiMongodb, SiMysql, SiAntdesign, SiTailwindcss, SiExpress, SiAmazonapigateway, SiAmazoncognito, SiAwsamplify, SiPassport, SiDjango, SiMui, SiJest, SiTestinglibrary } from 'react-icons/si'
-import { TbBrandCouchdb } from 'react-icons/tb'
+import {
+  SiReact, SiNextdotjs, SiRedux, SiJavascript, SiHtml5, SiCss3, SiMui, SiAntdesign, SiBootstrap, SiTailwindcss, SiSass, SiNodedotjs, SiExpress, SiJsonwebtokens, SiPassport, SiPython, SiDjango, SiMongodb, SiMysql, SiAmazonapigateway, SiAmazoncognito, SiAwsamplify, SiJest, SiTestinglibrary, SiTypescript
+} from 'react-icons/si'
 
 const frontendSkills = [
-  { icon: <FaReact />, label: 'React.js' },
+  { icon: <SiReact />, label: 'React.js' },
   { icon: <SiNextdotjs />, label: 'Next.js' },
   { icon: <SiJavascript />, label: 'JavaScript (ES6)' },
-  { icon: <FaHtml5 />, label: 'HTML5' },
-  { icon: <FaCss3Alt />, label: 'CSS3' },
+  { icon: <SiTypescript />, label: 'TypeScript' },
+  { icon: <SiHtml5 />, label: 'HTML5' },
+  { icon: <SiCss3 />, label: 'CSS3' },
   { icon: <SiRedux />, label: 'Redux' },
-  { icon: <FaReact />, label: 'React Query' },
-  { icon: <FaReact />, label: 'React Hook Form' },
+  { icon: <SiReact />, label: 'React Query' },
+  { icon: <SiReact />, label: 'React Hook Form' },
 ]
 
 const uiSkills = [
   { icon: <SiMui />, label: 'Material UI' },
   { icon: <SiAntdesign />, label: 'AntD' },
-  { icon: <FaBootstrap />, label: 'Bootstrap' },
+  { icon: <SiBootstrap />, label: 'Bootstrap' },
   { icon: <SiTailwindcss />, label: 'Tailwind CSS' },
-  { icon: <FaSass />, label: 'SASS' },
-  { icon: <FaTable />, label: 'TanStack Table' },
+  { icon: <SiSass />, label: 'SASS' },
+  { icon: <SiMui />, label: 'TanStack Table' },
 ]
 
 const backendSkills = [
-  { icon: <FaNodeJs />, label: 'Node.js' },
+  { icon: <SiNodedotjs />, label: 'Node.js' },
   { icon: <SiExpress />, label: 'Express.js' },
-  { icon: <SiPassport />, label: 'JWT' },
+  { icon: <SiJsonwebtokens />, label: 'JWT' },
   { icon: <SiPassport />, label: 'Passport.js' },
-  { icon: <FaPython />, label: 'Python' },
+  { icon: <SiPython />, label: 'Python' },
   { icon: <SiDjango />, label: 'Django REST API' },
 ]
 
 const databaseSkills = [
   { icon: <SiMongodb />, label: 'MongoDB' },
   { icon: <SiMysql />, label: 'MySQL' },
-  { icon: <TbBrandCouchdb />, label: 'CouchDB' },
+  { icon: <SiMongodb />, label: 'CouchDB' },
 ]
 
 const awsSkills = [
   { icon: <SiAmazonapigateway />, label: 'AWS API Gateway' },
   { icon: <SiAmazoncognito />, label: 'AWS Cognito' },
   { icon: <SiAwsamplify />, label: 'AWS Amplify' },
-  { icon: <FaDatabase />, label: 'AWS Lambda' },
-  { icon: <FaDatabase />, label: 'AWS S3' },
+  { icon: <SiAmazonapigateway />, label: 'AWS Lambda' },
+  { icon: <SiAmazonapigateway />, label: 'AWS S3' },
 ]
 
 const testingSkills = [
@@ -57,49 +58,49 @@ const skillCategories = [
   {
     id: 'all',
     label: 'All Skills',
-    icon: <FaCheckCircle />,
+    icon: <SiReact />,
     skills: [...frontendSkills, ...uiSkills, ...backendSkills, ...databaseSkills, ...awsSkills, ...testingSkills],
     isAllTab: true
   },
   {
     id: 'frontend',
     label: 'Frontend',
-    icon: <FaReact />,
+    icon: <SiReact />,
     skills: frontendSkills,
     isAllTab: false
   },
   {
     id: 'ui',
     label: 'UI & Styling',
-    icon: <FaPalette />,
+    icon: <SiMui />,
     skills: uiSkills,
     isAllTab: false
   },
   {
     id: 'backend',
     label: 'Backend',
-    icon: <FaNodeJs />,
+    icon: <SiNodedotjs />,
     skills: backendSkills,
     isAllTab: false
   },
   {
     id: 'database',
     label: 'Database',
-    icon: <FaDatabase />,
+    icon: <SiMongodb />,
     skills: databaseSkills,
     isAllTab: false
   },
   {
     id: 'aws',
     label: 'AWS Services',
-    icon: <FaAws />,
+    icon: <SiAmazonapigateway />,
     skills: awsSkills,
     isAllTab: false
   },
   {
     id: 'testing',
     label: 'Testing',
-    icon: <FaCheckCircle />,
+    icon: <SiJest />,
     skills: testingSkills,
     isAllTab: false
   }
@@ -120,12 +121,12 @@ function SkillGrid({ skills }: { skills: { icon: React.ReactNode, label: string 
 
 function AllSkillsSections() {
   const sections = [
-    { title: 'Frontend Development', icon: <FaReact />, skills: frontendSkills },
-    { title: 'UI Libraries & Styling', icon: <FaPalette />, skills: uiSkills },
-    { title: 'Backend Development', icon: <FaNodeJs />, skills: backendSkills },
-    { title: 'Database Technologies', icon: <FaDatabase />, skills: databaseSkills },
-    { title: 'AWS Cloud Services', icon: <FaAws />, skills: awsSkills },
-    { title: 'Testing & Quality', icon: <FaCheckCircle />, skills: testingSkills }
+    { title: 'Frontend Development', icon: <SiReact />, skills: frontendSkills },
+    { title: 'UI Libraries & Styling', icon: <SiMui />, skills: uiSkills },
+    { title: 'Backend Development', icon: <SiNodedotjs />, skills: backendSkills },
+    { title: 'Database Technologies', icon: <SiMongodb />, skills: databaseSkills },
+    { title: 'AWS Cloud Services', icon: <SiAmazonapigateway />, skills: awsSkills },
+    { title: 'Testing & Quality', icon: <SiJest />, skills: testingSkills }
   ]
 
   return (
