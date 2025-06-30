@@ -358,97 +358,125 @@ export async function generateStaticParams() {
   }));
 }
 
-export default function Page({ params }: { params: { slug: string } }) {
-  const project = projects.find((p) => p.slug === params.slug);
+export default async function Page({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params;
+  const project = projects.find((p) => p.slug === slug);
 
   if (!project) return notFound();
 
-  return (
-    <section className="section">
-      <div className="container">
-        <div className="project-details-header">
-          <Link href="/#projects" className="back-button">
-            <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-            </svg>
-            Back to Projects
-          </Link>
+  try {
+    return (
+      <section className="section">
+        <div className="container">
+          <div className="project-details-header">
+            <Link href="/#projects" className="back-button">
+              <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+              </svg>
+              Back to Projects
+            </Link>
           
-          <div className="project-title-section">
-            <div className="project-icon" style={{ fontSize: 48 }}>{project.icon}</div>
-            <div className="project-title-info">
-              <h1>{project.title}</h1>
-              <div className="project-duration">
-                <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                </svg>
-                <span>{project.duration}</span>
+            <div className="project-title-section">
+              <div className="project-icon" style={{ fontSize: 48 }}>{project.icon}</div>
+              <div className="project-title-info">
+                <h1>{project.title}</h1>
+                <div className="project-duration">
+                  <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                  <span>{project.duration}</span>
+                </div>
               </div>
             </div>
           </div>
-        </div>
         
-        <div className="project-details-content">
-          <div className="project-description-section">
-            <h3>Project Overview</h3>
-            <ul className="project-details-description">
-              {project.description.map((point, index) => (
-                <li key={index}>{point}</li>
-              ))}
-            </ul>
-          </div>
-          
-          <div className="key-features-section">
-            <h3>Key Features</h3>
-            <div className="key-features-grid">
-              {getKeyFeatures(project.slug).map((feature, index) => (
-                <div key={index} className="key-feature-card">
-                  <div className="key-feature-icon">
-                    {feature.icon}
-                  </div>
-                  <div className="key-feature-content">
-                    <h4>{feature.title}</h4>
-                    <p>{feature.description}</p>
-                  </div>
-                </div>
-              ))}
+          <div className="project-details-content">
+            <div className="project-description-section">
+              <h3>Project Overview</h3>
+              <ul className="project-details-description">
+                {project.description.map((point, index) => (
+                  <li key={index}>{point}</li>
+                ))}
+              </ul>
             </div>
-          </div>
           
-          <div className="tech-stack-section">
-            <h3>Tech Stack</h3>
-            <div className="tech-stack-tags">
-              {project.techStack.map((tech, index) => (
-                <span key={index} className="tech-tag">{tech}</span>
-              ))}
+            <div className="key-features-section">
+              <h3>Key Features</h3>
+              <div className="key-features-grid">
+                {getKeyFeatures(project.slug).map((feature, index) => (
+                  <div key={index} className="key-feature-card">
+                    <div className="key-feature-icon">
+                      {feature.icon}
+                    </div>
+                    <div className="key-feature-content">
+                      <h4>{feature.title}</h4>
+                      <p>{feature.description}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
             </div>
-          </div>
           
-          <div className="project-actions">
-            <a href={
-              project.slug === "vendor-contract-management" ? "https://d3kpd4nlxuq3hc.cloudfront.net/" :
-              project.slug === "genflix-ott-platform" ? "https://genflix.co.id/" :
-              project.slug === "vendor-portal" ? "https://oneview.petco.com/" :
-              project.slug === "11-plus-exam-preparation-platform" ? "https://11plusatease.co.uk/" :
-              project.slug === "student-web-application" ? "https://grow.hellothinkster.com/#/login" :
-              project.slug === "teacher-web-app" ? "https://tutor-sandbox.hellothinkster.com/login" :
-              "#"
-            } className="project-link primary" target="_blank" rel="noopener noreferrer">
-              <span>Live Demo</span>
-              <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-              </svg>
-            </a>
-            <a href="#" className="project-link secondary">
-              <span>View Code</span>
-              <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
-              </svg>
-            </a>
+            <div className="tech-stack-section">
+              <h3>Tech Stack</h3>
+              <div className="tech-stack-tags">
+                {project.techStack.map((tech, index) => (
+                  <span key={index} className="tech-tag">{tech}</span>
+                ))}
+              </div>
+            </div>
+          
+            <div className="project-actions">
+              <a href={
+                project.slug === "vendor-contract-management" ? "https://d3kpd4nlxuq3hc.cloudfront.net/" :
+                project.slug === "genflix-ott-platform" ? "https://genflix.co.id/" :
+                project.slug === "vendor-portal" ? "https://oneview.petco.com/" :
+                project.slug === "11-plus-exam-preparation-platform" ? "https://11plusatease.co.uk/" :
+                project.slug === "student-web-application" ? "https://grow.hellothinkster.com/#/login" :
+                project.slug === "teacher-web-app" ? "https://tutor-sandbox.hellothinkster.com/login" :
+                "#"
+              } className="project-link primary" target="_blank" rel="noopener noreferrer">
+                <span>Live Demo</span>
+                <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                </svg>
+              </a>
+              <a href="#" className="project-link secondary">
+                <span>View Code</span>
+                <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+                </svg>
+              </a>
+            </div>
           </div>
         </div>
-      </div>
-      <FloatingButtons />
-    </section>
-  );
+        <FloatingButtons />
+      </section>
+    );
+  } catch {
+    return (
+      <section className="section">
+        <div className="container flex flex-col items-center justify-center min-h-[60vh]">
+          <div className="bg-white/80 dark:bg-neutral-900/80 rounded-xl shadow-lg p-8 flex flex-col items-center max-w-md w-full border border-red-200 dark:border-red-800">
+            <div className="mb-4 text-red-500">
+              <svg width="48" height="48" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <circle cx="12" cy="12" r="10" strokeWidth="2" />
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8v4m0 4h.01" />
+              </svg>
+            </div>
+            <h2 className="text-2xl font-bold mb-2">Something went wrong</h2>
+            <p className="mb-6 text-center text-gray-600 dark:text-gray-300">
+              We couldn't load this project. Please try again later or return to the projects list.
+            </p>
+            <Link href="/#projects" className="btn btn-primary flex items-center gap-2">
+              <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+              </svg>
+              Back to Projects
+            </Link>
+          </div>
+        </div>
+      </section>
+    );
+  }
 } 
