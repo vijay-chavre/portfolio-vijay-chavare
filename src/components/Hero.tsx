@@ -9,7 +9,7 @@ export default function Hero({ scrollToSection }: HeroProps) {
     <section className="hero">
       <div className="container">
         <div className="hero-content animate-fade-in-up">
-          <h1>Hi, I&apos;m Vijay Rajendra Chavre</h1>
+          {/* <h1>Hi, I&apos;m Vijay Rajendra Chavre</h1> */}
           <h2>Web Application Developer (React JS, Next JS, NodeJS REST, AWS services)</h2>
           <p>
             Over 8+ years of professional expertise in JavaScript Fullstack Development, 
