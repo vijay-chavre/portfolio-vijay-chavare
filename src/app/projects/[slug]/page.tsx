@@ -466,7 +466,7 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
             </div>
             <h2 className="text-2xl font-bold mb-2">Something went wrong</h2>
             <p className="mb-6 text-center text-gray-600 dark:text-gray-300">
-              We couldn't load this project. Please try again later or return to the projects list.
+              We couldn&#39;t load this project. Please try again later or return to the projects list.
             </p>
             <Link href="/#projects" className="btn btn-primary flex items-center gap-2">
               <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
