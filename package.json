@@ -4,11 +4,9 @@
   "private": true,
   "scripts": {
     "dev": "next dev --turbopack",
-    "build": "next build && echo '' > out/.nojekyll",
-    "build:gh-pages": "NODE_ENV=production npm run build gh-pages -d out",
+    "build": "next build",
     "start": "next start",
-    "lint": "next lint",
-    "deploy": "gh-pages -d out"
+    "lint": "next lint"
   },
 
   "dependencies": {
