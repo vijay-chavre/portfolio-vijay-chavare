@@ -1,9 +1,12 @@
 'use client'
 
 import { useState, useEffect } from 'react'
+import Link from 'next/link'
+import { usePathname } from 'next/navigation'
 
 export default function Navigation() {
   const [isScrolled, setIsScrolled] = useState(false)
+  const pathname = usePathname()
 
   useEffect(() => {
     const handleScroll = () => {
@@ -21,6 +24,8 @@ export default function Navigation() {
     }
   }
 
+  const isHomePage = pathname === '/'
+
   return (
     <nav className={`fixed top-0 w-full z-50 transition-all duration-300 ${
       isScrolled 
@@ -29,29 +34,45 @@ export default function Navigation() {
     }`}>
       <div className="max-w-6xl mx-auto px-6">
         <div className="flex items-center justify-between h-16">
-          <div className="text-text-primary font-bold text-xl gradient-text">
+          <Link href="/" className="text-text-primary font-bold text-xl gradient-text">
             Vijay Chavare
-          </div>
+          </Link>
           
           <div className="hidden md:flex space-x-8">
-            <button
-              onClick={() => scrollToSection('about')}
-              className="nav-link"
-            >
-              About
-            </button>
-            <button
-              onClick={() => scrollToSection('projects')}
-              className="nav-link"
-            >
-              Projects
-            </button>
-            <button
-              onClick={() => scrollToSection('contact')}
-              className="nav-link"
-            >
-              Contact
-            </button>
+            {isHomePage ? (
+              <>
+                <button
+                  onClick={() => scrollToSection('about')}
+                  className="nav-link"
+                >
+                  About
+                </button>
+                <button
+                  onClick={() => scrollToSection('projects')}
+                  className="nav-link"
+                >
+                  Projects
+                </button>
+                <button
+                  onClick={() => scrollToSection('contact')}
+                  className="nav-link"
+                >
+                  Contact
+                </button>
+              </>
+            ) : (
+              <>
+                <Link href="/about" className="nav-link">
+                  About
+                </Link>
+                <Link href="/projects" className="nav-link">
+                  Projects
+                </Link>
+                <Link href="/contact" className="nav-link">
+                  Contact
+                </Link>
+              </>
+            )}
           </div>
           
           <div className="md:hidden">
