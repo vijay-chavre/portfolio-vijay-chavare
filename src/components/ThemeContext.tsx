@@ -12,7 +12,7 @@ interface ThemeContextType {
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined)
 
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
-  const [theme, setTheme] = useState<Theme>('dark')
+  const [theme, setTheme] = useState<Theme | null>(null)
 
   useEffect(() => {
     // Check for saved theme preference or default to dark
@@ -21,18 +21,24 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
       setTheme(savedTheme)
     } else if (window.matchMedia('(prefers-color-scheme: light)').matches) {
       setTheme('light')
+    } else {
+      setTheme('dark')
     }
   }, [])
 
   useEffect(() => {
-    // Apply theme to document
-    document.documentElement.setAttribute('data-theme', theme)
-    localStorage.setItem('theme', theme)
+    if (theme) {
+      document.documentElement.setAttribute('data-theme', theme)
+      localStorage.setItem('theme', theme)
+    }
   }, [theme])
 
   const toggleTheme = () => {
-    setTheme(prev => prev === 'dark' ? 'light' : 'dark')
+    setTheme(prev => (prev === 'dark' ? 'light' : 'dark'))
   }
+
+  // Prevent hydration mismatch by not rendering until theme is set
+  if (!theme) return null
 
   return (
     <ThemeContext.Provider value={{ theme, toggleTheme }}>

@@ -38,13 +38,13 @@ export default function Navigation() {
           <ul className="nav-links">
             {isHomePage ? (
               <>
-                <li><a href="#about" onClick={(e) => { e.preventDefault(); scrollToSection('about') }}>About</a></li>
+                <li><a href="#about" onClick={(e) => { e.preventDefault(); scrollToSection('about') }}>Skills</a></li>
                 <li><a href="#projects" onClick={(e) => { e.preventDefault(); scrollToSection('projects') }}>Projects</a></li>
                 <li><a href="#contact" onClick={(e) => { e.preventDefault(); scrollToSection('contact') }}>Contact</a></li>
               </>
             ) : (
               <>
-                <li><Link href="/about">About</Link></li>
+                <li><Link href="/about">Skills</Link></li>
                 <li><Link href="/projects">Projects</Link></li>
                 <li><Link href="/contact">Contact</Link></li>
               </>
