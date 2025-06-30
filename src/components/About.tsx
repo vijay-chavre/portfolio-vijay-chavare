@@ -1,5 +1,6 @@
 'use client'
 
+import { useState } from 'react'
 import { FaReact, FaNodeJs, FaHtml5, FaCss3Alt, FaSass, FaBootstrap, FaPython, FaDatabase, FaTable, FaPalette, FaAws, FaCheckCircle } from 'react-icons/fa'
 import { SiNextdotjs, SiRedux, SiJavascript, SiMongodb, SiMysql, SiAntdesign, SiTailwindcss, SiExpress, SiAmazonapigateway, SiAmazoncognito, SiAwsamplify, SiPassport, SiDjango, SiMui, SiJest, SiTestinglibrary } from 'react-icons/si'
 import { TbBrandCouchdb } from 'react-icons/tb'
@@ -52,6 +53,58 @@ const testingSkills = [
   { icon: <SiTestinglibrary />, label: 'React Testing Library' },
 ]
 
+const skillCategories = [
+  {
+    id: 'all',
+    label: 'All Skills',
+    icon: <FaCheckCircle />,
+    skills: [...frontendSkills, ...uiSkills, ...backendSkills, ...databaseSkills, ...awsSkills, ...testingSkills],
+    isAllTab: true
+  },
+  {
+    id: 'frontend',
+    label: 'Frontend',
+    icon: <FaReact />,
+    skills: frontendSkills,
+    isAllTab: false
+  },
+  {
+    id: 'ui',
+    label: 'UI & Styling',
+    icon: <FaPalette />,
+    skills: uiSkills,
+    isAllTab: false
+  },
+  {
+    id: 'backend',
+    label: 'Backend',
+    icon: <FaNodeJs />,
+    skills: backendSkills,
+    isAllTab: false
+  },
+  {
+    id: 'database',
+    label: 'Database',
+    icon: <FaDatabase />,
+    skills: databaseSkills,
+    isAllTab: false
+  },
+  {
+    id: 'aws',
+    label: 'AWS Services',
+    icon: <FaAws />,
+    skills: awsSkills,
+    isAllTab: false
+  },
+  {
+    id: 'testing',
+    label: 'Testing',
+    icon: <FaCheckCircle />,
+    skills: testingSkills,
+    isAllTab: false
+  }
+]
+
 function SkillGrid({ skills }: { skills: { icon: React.ReactNode, label: string }[] }) {
   return (
     <div className="skill-tile-grid">
@@ -65,40 +118,76 @@ function SkillGrid({ skills }: { skills: { icon: React.ReactNode, label: string 
   )
 }
 
-export default function About() {
+function AllSkillsSections() {
+  const sections = [
+    { title: 'Frontend Development', icon: <FaReact />, skills: frontendSkills },
+    { title: 'UI Libraries & Styling', icon: <FaPalette />, skills: uiSkills },
+    { title: 'Backend Development', icon: <FaNodeJs />, skills: backendSkills },
+    { title: 'Database Technologies', icon: <FaDatabase />, skills: databaseSkills },
+    { title: 'AWS Cloud Services', icon: <FaAws />, skills: awsSkills },
+    { title: 'Testing & Quality', icon: <FaCheckCircle />, skills: testingSkills }
+  ]
+
   return (
-    <section id="about" className="section section--fullwidth">
+    <div className="all-skills-sections">
+      {sections.map((section) => (
+        <div key={section.title} className="skill-section">
+          <div className="skill-section-header">
+            <span className="skill-section-icon">{section.icon}</span>
+            <h4>{section.title}</h4>
+          </div>
+          <SkillGrid skills={section.skills} />
+        </div>
+      ))}
+    </div>
+  )
+}
+
+export default function About() {
+  const [activeTab, setActiveTab] = useState('all')
+
+  return (
+    <section id="about" className="section">
       <div className="container">
         <div className="section-title animate-fade-in-up">
           <h2>Skills</h2>
           <p>Technical expertise and technologies I work with</p>
         </div>
-        <div className="skills-grid animate-fade-in-up">
-          <div className="skill-card">
-            <div className="skill-card-header"><FaReact className="skill-card-header-icon" /><h3>Frontend Development</h3></div>
-            <SkillGrid skills={frontendSkills} />
+        
+        <div className="skills-tabs-container animate-fade-in-up">
+          <div className="skills-tabs">
+            {skillCategories.map((category) => (
+              <button
+                key={category.id}
+                className={`skill-tab ${activeTab === category.id ? 'active' : ''}`}
+                onClick={() => setActiveTab(category.id)}
+              >
+                <span className="skill-tab-icon">{category.icon}</span>
+                <span className="skill-tab-label">{category.label}</span>
+              </button>
+            ))}
           </div>
-          <div className="skill-card">
-            <div className="skill-card-header"><FaPalette className="skill-card-header-icon" /><h3>UI Libraries & Styling</h3></div>
-            <SkillGrid skills={uiSkills} />
+          
+          <div className="skills-content">
+            {skillCategories.map((category) => (
+              <div
+                key={category.id}
+                className={`skill-content ${activeTab === category.id ? 'active' : ''}`}
+              >
+                <div className="skill-card">
+                  <div className="skill-card-header">
+                    {category.icon}
+                    <h3>{category.label}</h3>
+                  </div>
+                  {category.isAllTab ? (
+                    <AllSkillsSections />
+                  ) : (
+                    <SkillGrid skills={category.skills} />
+                  )}
+                </div>
+              </div>
+            ))}
           </div>
-          <div className="skill-card">
-            <div className="skill-card-header"><FaCheckCircle className="skill-card-header-icon" /><h3>Testing</h3></div>
-            <SkillGrid skills={testingSkills} />
-          </div>
-          <div className="skill-card">
-            <div className="skill-card-header"><FaNodeJs className="skill-card-header-icon" /><h3>Backend</h3></div>
-            <SkillGrid skills={backendSkills} />
-          </div>
-          <div className="skill-card">
-            <div className="skill-card-header"><FaDatabase className="skill-card-header-icon" /><h3>Database</h3></div>
-            <SkillGrid skills={databaseSkills} />
-          </div>
-          <div className="skill-card">
-            <div className="skill-card-header"><FaAws className="skill-card-header-icon" /><h3>AWS Services</h3></div>
-            <SkillGrid skills={awsSkills} />
-          </div>
-         
         </div>
       </div>
     </section>
