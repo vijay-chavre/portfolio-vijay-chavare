@@ -1,5 +1,8 @@
 'use client'
 
+import { useState, useRef } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+
 interface Project {
   id: number;
   slug: string;
@@ -139,6 +142,17 @@ const projects: Project[] = [
 ];
 
 export default function Projects() {
+  const [visibleCount, setVisibleCount] = useState(4);
+  const showAll = visibleCount >= projects.length;
+  const gridRef = useRef<HTMLDivElement>(null);
+
+  const handleToggle = () => {
+    if (showAll && gridRef.current) {
+      gridRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+    setVisibleCount(showAll ? 4 : projects.length);
+  };
+
   return (
     <section id="projects" className="section">
       <div className="container">
@@ -147,58 +161,75 @@ export default function Projects() {
           <p>Showcasing my technical expertise and problem-solving approach</p>
         </div>
         
-        <div className="projects-grid">
-          {projects.map((project) => (
-            <div 
-              key={project.id} 
-              className="project-card animate-fade-in-up"
-              style={project.animationDelay ? { animationDelay: project.animationDelay } : undefined}
-            >
-              <div className="project-header">
-                <div className="project-icon">
-                  {project.icon}
+        <div className="projects-grid" ref={gridRef}>
+          <AnimatePresence initial={false}>
+            {projects.slice(0, visibleCount).map((project) => (
+              <motion.div
+                key={project.id}
+                className="project-card animate-fade-in-up"
+                style={project.animationDelay ? { animationDelay: project.animationDelay } : undefined}
+                initial={{ opacity: 0, scale: 0.95 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.95 }}
+                transition={{ duration: 0.3 }}
+                layout
+              >
+                <div className="project-header">
+                  <div className="project-icon">
+                    {project.icon}
+                  </div>
+                  <div className="project-title-info">
+                    <h3>{project.title}</h3>
+                  </div>
                 </div>
-                <div className="project-title-info">
-                  <h3>{project.title}</h3>
+                
+                <p className="project-description">{project.shortDescription}</p>
+                
+                <div className="tech-stack-section">
+                  <h4>Tech Stack</h4>
+                  <div className="tech-stack-tags">
+                    {project.techStack.map((tech, index) => (
+                      <span key={index} className="tech-tag">{tech}</span>
+                    ))}
+                  </div>
                 </div>
-              </div>
-              
-              <p className="project-description">{project.shortDescription}</p>
-              
-              <div className="tech-stack-section">
-                <h4>Tech Stack</h4>
-                <div className="tech-stack-tags">
-                  {project.techStack.map((tech, index) => (
-                    <span key={index} className="tech-tag">{tech}</span>
-                  ))}
+                
+                <div className="project-links">
+                  <a href={
+                    project.slug === "vendor-contract-management" ? "https://d3kpd4nlxuq3hc.cloudfront.net/" :
+                    project.slug === "genflix-ott-platform" ? "https://genflix.co.id/" :
+                    project.slug === "vendor-portal" ? "https://oneview.petco.com/" :
+                    project.slug === "11-plus-exam-preparation-platform" ? "https://11plusatease.co.uk/" :
+                    project.slug === "student-web-application" ? "https://grow.hellothinkster.com/#/login" :
+                    project.slug === "teacher-web-app" ? "https://tutor-sandbox.hellothinkster.com/login" :
+                    "#"
+                  } className="project-link" target="_blank" rel="noopener noreferrer">
+                    <span>Live Demo</span>
+                    <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                    </svg>
+                  </a>
+                  <a href={`/projects/${project.slug}`} className="project-link">
+                    <span>View Details</span>
+                    <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                    </svg>
+                  </a>
                 </div>
-              </div>
-              
-              <div className="project-links">
-                <a href={
-                  project.slug === "vendor-contract-management" ? "https://d3kpd4nlxuq3hc.cloudfront.net/" :
-                  project.slug === "genflix-ott-platform" ? "https://genflix.co.id/" :
-                  project.slug === "vendor-portal" ? "https://oneview.petco.com/" :
-                  project.slug === "11-plus-exam-preparation-platform" ? "https://11plusatease.co.uk/" :
-                  project.slug === "student-web-application" ? "https://grow.hellothinkster.com/#/login" :
-                  project.slug === "teacher-web-app" ? "https://tutor-sandbox.hellothinkster.com/login" :
-                  "#"
-                } className="project-link" target="_blank" rel="noopener noreferrer">
-                  <span>Live Demo</span>
-                  <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                  </svg>
-                </a>
-                <a href={`/projects/${project.slug}`} className="project-link">
-                  <span>View Details</span>
-                  <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                  </svg>
-                </a>
-              </div>
-            </div>
-          ))}
+              </motion.div>
+            ))}
+          </AnimatePresence>
         </div>
+        {projects.length > 4 && (
+          <div style={{ textAlign: 'center', marginTop: '2rem' }}>
+            <button
+              className="btn btn-secondary"
+              onClick={handleToggle}
+            >
+              {showAll ? 'Show Less' : 'Load More'}
+            </button>
+          </div>
+        )}
       </div>
     </section>
   )

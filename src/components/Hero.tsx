@@ -9,15 +9,21 @@ interface HeroProps {
 export default function Hero({ scrollToSection }: HeroProps) {
   return (
     <section className="hero">
-      <div className="container">
-        <div className="hero-content animate-fade-in-up">
+      <div className="container" style={{ maxWidth: '100vw', overflowX: 'hidden', padding: 0 }}>
+        <div
+          className="hero-content animate-fade-in-up px-3 sm:px-0"
+          style={{ maxWidth: '100vw', overflowX: 'hidden' }}
+        >
           {/* <h1>Hi, I&apos;m Vijay Rajendra Chavre</h1> */}
           <h1>Web Application Developer</h1>
           <p>
             8+ years building scalable, high-performance web apps using <b>React.js</b>, <b>Next.js</b>, <b>Node.js</b>, and <b>AWS</b>.<br/>
             Passionate about modern JavaScript, TypeScript, cloud-native architectures, REST APIs, CI/CD, and automated testing.
           </p>
-          <div className="hero-tech-stack" style={{ display: 'flex', gap: '1.5rem', justifyContent: 'center', alignItems: 'center', margin: '1.5rem 0' }}>
+          <div
+            className="hero-tech-stack"
+            style={{ display: 'flex', gap: '1.2rem', justifyContent: 'center', alignItems: 'center', margin: '1.5rem 0', padding: '0 0.5rem', maxWidth: '100vw', overflowX: 'hidden' }}
+          >
             <SiReact size={32} title="React.js" />
             <SiNextdotjs size={32} title="Next.js" />
             <SiNodedotjs size={32} title="Node.js" />

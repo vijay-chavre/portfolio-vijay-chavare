@@ -1,6 +1,7 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useRef } from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
 import {
   SiReact, SiNextdotjs, SiRedux, SiJavascript, SiHtml5, SiCss3, SiMui, SiAntdesign, SiBootstrap, SiTailwindcss, SiSass, SiNodedotjs, SiExpress, SiJsonwebtokens, SiPassport, SiPython, SiDjango, SiMongodb, SiMysql, SiAmazonapigateway, SiAmazoncognito, SiAwsamplify, SiJest, SiTestinglibrary, SiTypescript
 } from 'react-icons/si'
@@ -128,19 +129,49 @@ function AllSkillsSections() {
     { title: 'AWS Cloud Services', icon: <SiAmazonapigateway />, skills: awsSkills },
     { title: 'Testing & Quality', icon: <SiJest />, skills: testingSkills }
   ]
-
+  const [visibleCount, setVisibleCount] = useState(4);
+  const showAll = visibleCount >= sections.length;
+  const sectionRef = useRef<HTMLDivElement>(null);
+  const handleToggle = () => {
+    if (showAll && sectionRef.current) {
+      sectionRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+    setVisibleCount(showAll ? 4 : sections.length);
+  };
   return (
-    <div className="all-skills-sections">
-      {sections.map((section) => (
-        <div key={section.title} className="skill-section">
-          <div className="skill-section-header">
-            <span className="skill-section-icon">{section.icon}</span>
-            <h4>{section.title}</h4>
-          </div>
-          <SkillGrid skills={section.skills} />
+    <>
+      <div className="all-skills-sections" ref={sectionRef}>
+        <AnimatePresence initial={false}>
+          {sections.slice(0, visibleCount).map((section) => (
+            <motion.div
+              key={section.title}
+              className="skill-section"
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.95 }}
+              transition={{ duration: 0.3 }}
+              layout
+            >
+              <div className="skill-section-header">
+                <span className="skill-section-icon">{section.icon}</span>
+                <h4>{section.title}</h4>
+              </div>
+              <SkillGrid skills={section.skills} />
+            </motion.div>
+          ))}
+        </AnimatePresence>
+      </div>
+      {sections.length > 4 && (
+        <div style={{ textAlign: 'center', marginTop: '1.5rem' }}>
+          <button
+            className="btn btn-secondary"
+            onClick={handleToggle}
+          >
+            {showAll ? 'Show Less' : 'Load More'}
+          </button>
         </div>
-      ))}
-    </div>
+      )}
+    </>
   )
 }
 
