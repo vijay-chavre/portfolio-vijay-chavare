@@ -176,62 +176,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Experience Section */}
-      <section className="section">
-        <div className="container">
-          <div className="section-title animate-fade-in-up">
-            <h2>Professional Experience</h2>
-            <p>My journey in software development and key achievements</p>
-          </div>
-          
-          <div className="experience-grid">
-            <div className="experience-card animate-fade-in-up">
-              <div className="experience-header">
-                <h3>Web Application Developer</h3>
-                <span className="company">Systems Plus</span>
-                <span className="duration">May 2019 - Present</span>
-              </div>
-              <ul className="experience-list">
-                <li>Expertise in React.js, Redux, Next.js, React-routing, Node.js, Express.js, and MongoDB</li>
-                <li>Develops reusable interactive React components for web applications</li>
-                <li>Utilizes Redux-Thunk for managing asynchronous API calls</li>
-                <li>Implements authentication using AWS Serverless Amplify</li>
-                <li>Proficient with AWS Lambda functions, API Gateways, and S3 buckets for hosting static React.js applications</li>
-              </ul>
-            </div>
-
-            <div className="experience-card animate-fade-in-up" style={{animationDelay: '0.1s'}}>
-              <div className="experience-header">
-                <h3>Software Engineer</h3>
-                <span className="company">Sigma Infosolutions</span>
-                <span className="duration">Jan 2019 - May 2019</span>
-              </div>
-              <ul className="experience-list">
-                <li>Explored React Js, Redux, React-routing, Node js, Express js, Mongo DB</li>
-                <li>Primary focus on developing reusable interactive react components</li>
-                <li>Explored redux-saga library to handle asynchronous API calls from React js Web app</li>
-                <li>Developed REST API to connect react js web app to the backend and Mongo DB as a database</li>
-              </ul>
-            </div>
-
-            <div className="experience-card animate-fade-in-up" style={{animationDelay: '0.2s'}}>
-              <div className="experience-header">
-                <h3>Software Developer</h3>
-                <span className="company">Prazas India Pvt.Ltd (Tabtor Math)</span>
-                <span className="duration">Mar 2017 - Dec 2018</span>
-              </div>
-              <ul className="experience-list">
-                <li>Full-Stack Developer: Web (React/Redux/Sails.js)</li>
-                <li>Built and maintained a dynamic and interactive web app for Tabtor Math using React.js library</li>
-                <li>Utilized Redux for efficient state management within the React application</li>
-                <li>Implemented features leveraging React&apos;s component-based architecture for maintainability and scalability</li>
-                <li>Optimized web app performance with techniques like code-splitting and lazy loading</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </section>
-
       {/* Projects Section */}
       <section id="projects" className="section">
         <div className="container">
