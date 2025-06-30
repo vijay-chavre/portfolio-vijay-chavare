@@ -1,36 +1,90 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Vijay Chavare - Portfolio Website
+
+A modern, responsive portfolio website built with Next.js, TypeScript, and Tailwind CSS.
+
+## Features
+
+- **Modern Design**: Clean, professional design with a dark theme and purple accents
+- **Responsive**: Fully responsive design that works on all devices
+- **Performance**: Optimized for speed and performance
+- **Accessibility**: Built with accessibility best practices
+- **SEO Optimized**: Proper meta tags and structured content
+
+## Sections
+
+- **Hero Section**: Eye-catching introduction with call-to-action buttons
+- **About Me**: Professional background, skills, and development philosophy
+- **Projects**: Showcase of featured projects with technical details
+- **Contact**: Multiple ways to get in touch and social media links
+
+## Technologies Used
+
+- **Next.js 14**: React framework with App Router
+- **TypeScript**: Type-safe JavaScript
+- **Tailwind CSS**: Utility-first CSS framework
+- **React**: Modern React with hooks
 
 ## Getting Started
 
-First, run the development server:
+### Prerequisites
 
+- Node.js 18+ 
+- npm or yarn
+
+### Installation
+
+1. Clone the repository:
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+git clone <repository-url>
+cd portfolio-vijay-chavare
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+2. Install dependencies:
+```bash
+npm install
+```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+3. Run the development server:
+```bash
+npm run dev
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+4. Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-## Learn More
+## Customization
 
-To learn more about Next.js, take a look at the following resources:
+### Personal Information
+Update the following files with your information:
+- `src/app/page.tsx`: Update name, description, and project details
+- `src/app/layout.tsx`: Update metadata and title
+- Contact links and social media URLs
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Styling
+- Colors and theme can be customized in `tailwind.config.ts`
+- Component styles are in the respective component files
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### Projects
+Add your own projects by modifying the projects section in `src/app/page.tsx`
 
-## Deploy on Vercel
+## Deployment
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+This portfolio can be easily deployed to:
+- **Vercel** (recommended for Next.js)
+- **Netlify**
+- **GitHub Pages**
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### Vercel Deployment
+1. Push your code to GitHub
+2. Connect your repository to Vercel
+3. Deploy automatically
+
+## License
+
+This project is open source and available under the [MIT License](LICENSE).
+
+## Contact
+
+Vijay Chavare
+- Email: vijay@example.com
+- LinkedIn: [linkedin.com/in/vijaychavare](https://linkedin.com/in/vijaychavare)
+- GitHub: [github.com/vijaychavare](https://github.com/vijaychavare)
