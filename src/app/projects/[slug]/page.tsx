@@ -358,11 +358,7 @@ export async function generateStaticParams() {
   }));
 }
 
-interface ProjectDetailsPageProps {
-  params: { slug: string };
-}
-
-export default function ProjectDetailsPage({ params }: ProjectDetailsPageProps) {
+export default function Page({ params }: { params: { slug: string } }) {
   const project = projects.find((p) => p.slug === params.slug);
 
   if (!project) return notFound();
